@@ -1,0 +1,44 @@
+{
+  "name": "jira-contractor-guest-to-member",
+  "description": "Capture previous contractor access and preserve permissions when converting a guest user to a member in Azure AD.",
+  "trigger": {
+    "type": "jira.issue.updated",
+    "conditions": [
+      "issue.fields.issuetype.name == 'Access Change'",
+      "issue.fields.summary =~ /guest to member/i",
+      "issue.fields.status.name == 'Ready for Automation'"
+    ]
+  },
+  "actions": [
+    {
+      "name": "captureCurrentAccess",
+      "type": "azureGraph",
+      "operation": "snapshot",
+      "description": "Snapshot Azure AD groups and application role assignments for the target user before changing the type."
+    },
+    {
+      "name": "changeUserType",
+      "type": "azureGraph",
+      "operation": "patchUserType",
+      "parameters": {
+        "userType": "Member"
+      }
+    },
+    {
+      "name": "restoreAccess",
+      "type": "azureGraph",
+      "operation": "restoreMemberships",
+      "description": "Re-apply groups and app role assignments if any were lost during conversion."
+    },
+    {
+      "name": "updateJira",
+      "type": "jira",
+      "operation": "comment",
+      "description": "Post status and audit notes back to the Jira ticket."
+    }
+  ],
+  "outputs": {
+    "snapshotFile": "access-snapshot-{{targetUserEmail}}.json",
+    "jiraComment": "User type converted and access preservation completed."
+  }
+}
