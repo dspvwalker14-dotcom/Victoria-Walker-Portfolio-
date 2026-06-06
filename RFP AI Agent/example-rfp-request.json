@@ -1,0 +1,9 @@
+{
+  "rfpQuestion": "What are your service level agreements (SLAs) for incident response?",
+  "context": "This is for a cloud infrastructure RFP in the financial services sector.",
+  "constraints": [
+    "Must comply with PCI-DSS",
+    "Must support 24/7/365 operations",
+    "Budget constraint: $50k/month"
+  ]
+}
