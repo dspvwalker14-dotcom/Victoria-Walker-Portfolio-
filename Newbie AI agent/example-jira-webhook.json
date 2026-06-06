@@ -1,0 +1,24 @@
+{
+  "webhookEvent": "jira:issue_created",
+  "issue_event_type_name": "issue_created",
+  "issue": {
+    "key": "ONBOARD-123",
+    "fields": {
+      "summary": "New hire onboarding for Jane Doe",
+      "description": "Please schedule IT onboarding for the new hire.",
+      "issuetype": { "name": "Onboarding" },
+      "status": { "name": "To Do" },
+      "labels": ["onboarding", "new-hire"],
+      "customfield_10010": "Jane Doe",
+      "customfield_10011": "jane.doe@example.com",
+      "customfield_10012": "2026-06-15",
+      "customfield_10013": "Software Engineer",
+      "customfield_10014": "Engineering",
+      "customfield_10015": "John Smith",
+      "customfield_10016": "john.smith@example.com",
+      "customfield_10017": "New York",
+      "customfield_10018": "America/New_York",
+      "customfield_10019": "Needs laptop, Teams, and enterprise app access"
+    }
+  }
+}
